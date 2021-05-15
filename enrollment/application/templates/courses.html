@@ -1,0 +1,86 @@
+
+{% extends "index.html" %}
+
+{% if checkLogin %}
+{%block style%}
+<style>
+.courses{
+	width:60%;
+	margin-left: auto;
+  	margin-right: auto;
+        
+}
+
+.courses tbody, .courses thead {
+            display: block;
+} 
+.courses tbody {
+        height: 400px; 
+        overflow-y: auto;
+        overflow-x: hidden; 
+}        
+.courses td, .courses th{
+	border: 1px solid #ddd;
+  	padding: 8px;
+  	text-align: center;
+}
+.courses tr:hover{
+	background-color: green;
+}
+.courses th{
+	padding-top: 12px;
+  	padding-bottom: 12px;
+  	background-color: green;
+  	color: white;
+}
+
+</style>
+
+{%endblock%}
+{% endif %}
+        {% block content %}
+        
+        {% if checkLogin %}
+               
+                        <table class = 'courses'>
+                                <thead>
+                                <tr>
+                                        <th>id</th>
+                                        <th>course Name</th>
+                                        <th>description</th>
+                                        <th>price</th>
+                                        <th>register</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for course in data %}
+                                
+                                <tr>
+                                       
+                                        <td>{{course['id']}}</td>
+                                        <td>{{course['title']}}</td>
+                                        <td>{{course['description']}}</td>
+                                        <td>{{course['price']}}</td>
+                                        <form action ="/registerCourse", method="POST">
+                                                <input type="hidden" name="username" value = "{{name}}">
+                                                <input type="hidden" name="id" value = "{{course['id']}}">
+                                                <input type="hidden" name="course" value = "{{course['title']}}">
+                                                <input type="hidden" name="description" value = "{{course['description']}}">
+                                                <input type="hidden" name="price" value = "{{course['price']}}">
+                                        <td><button>register</button></td>
+                                        
+                                        </form>
+                                </tr>
+                                
+                                {% endfor %}
+                                </tbody>
+                        </table>
+                        <p>{{tag}}</p>}
+                
+        {% else %}
+        <h1>please signin or sign up to access list of courses</h1>
+        {% endif %}
+                
+        {% endblock %}
+
+ 

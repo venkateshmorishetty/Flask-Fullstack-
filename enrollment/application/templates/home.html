@@ -1,0 +1,43 @@
+{% extends "index.html" %}
+
+{% block style %}
+<style>
+.courses table, tr,td,th {
+        border: 2px solid green;
+       margin: 0px;
+        text-align: center;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+{% if check %}
+<h1>Welcome to Enrollment {{name}}!</h1>
+<div class="courses">
+    <h2>your courses are:</h2>
+    
+    {% if courses is defined %}
+    <table>
+        <tr>
+            <th>title</th>
+            <th>description</th>
+        </tr>    
+    {% for course in courses %}
+        
+        <tr>
+            <td>{{course['name']}}</td>
+            <td>{{course['description']}}</td>
+        </tr>    
+    {% endfor %}
+    {% else %}
+    <h3>there are no courses</h3>
+    {% endif %}
+    </table>
+    
+</div>
+{% else %}
+<h1>please Login to access Enrollment services</h1>
+{% endif %}
+
+{% endblock %}
+

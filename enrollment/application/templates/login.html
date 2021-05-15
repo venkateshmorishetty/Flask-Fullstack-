@@ -1,0 +1,68 @@
+{% extends "index.html" %}
+
+{% block style %}
+<style>
+.content {
+  
+  width: 200px;
+  margin: auto;
+  border: 3px solid #73AD21;
+  margin-top: 100px;
+}
+td{
+    padding: 10px;
+}
+</style>
+
+{% endblock %}
+
+{% block content %}
+
+{%if checkLogin %}
+<h1>You are already login with the UserName {{name}}</h1>
+<h1>Details</h1>
+<div class ="content">
+    <table>
+        <tr>
+            <td>{{details['name']}}</td>
+        </tr>
+        <tr>
+            <td>{{details['phone']}}</td>
+        </tr>
+    </table>
+</div>
+{% else %}
+<div class='content'>
+    <form action="/checkLogin" method = "GET">
+        <table>
+            <tr>
+            <td>
+                Enter UserName:<br><br>
+                <input type="text" name="username" placeholder="Username" required>
+            </td>
+            </tr>
+            <tr>
+            <td>
+                Enter Passoword:<br><br>
+                <input type="password" name="password" placeholder="Password" required>
+            </td>
+        </tr>
+            <tr>
+            <td>
+                <button>Login</button>
+            </td>
+        </tr>
+         </tr>
+        <tr>
+            <td>
+               <p>{{tag}}</p>
+            </td>
+        </tr>
+
+        </table>
+           
+    </form>
+</div>
+
+{% endif %}
+{% endblock %}
